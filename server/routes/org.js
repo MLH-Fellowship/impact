@@ -61,7 +61,7 @@ orgRouter.delete('/:id', (req, res) => {
 });
 
 // UPDATE
-orgRouter.update('/:id', (req, res) => {
+orgRouter.put('/:id', (req, res) => {
   Org.findOneAndUpdate(req.params.id, req.body, { runValidators: true }, (err, response) => {
     if (err) {
       res.status(500).json({

@@ -9,6 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//routes
+const org = require('./routes/org');
+app.use('/org', org);
 
 mongoose.connect(process.env.URI, {
   useNewUrlParser: true,
@@ -27,8 +30,6 @@ const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`server is running on port: ${PORT}`);
 });
-
-// ROUTES
 
 
 
