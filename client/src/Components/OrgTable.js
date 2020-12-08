@@ -7,6 +7,7 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
+    render: (text, record) => <a target='_blank' rel='noopener noreferrer' href={record.website}>{text}</a>
   },
   {
     title: "Description",
@@ -48,10 +49,10 @@ export class OrgTable extends Component {
           name: newData[obj].name,
           cause: newData[obj].cause,
           location: newData[obj].location,
-          desc: newData[obj].desc
+          desc: newData[obj].desc,
+          website: newData[obj].website
         });
       }
-      console.log("Pushed data!");
       this.setState({data: realDataObjs});
     } catch (error) {
       console.error(error);
