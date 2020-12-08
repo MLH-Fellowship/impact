@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const PaymentSchema = new Schema({
+const TransactionSchema = new Schema({
   userid: { // sender
     type: mongoose.Schema.Types.ObjectId,
     required: true
@@ -10,21 +10,14 @@ const PaymentSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
-  freq: {
-    type: String,
+  paymentid: { // id of recurring payment
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   value: {
     type: Number,
     required: true
   },
-  active: {
-    type: Boolean,
-    required: true
-  }
-});
+}, { timestamps: { createdAt: 'createdat' } });
 
-// enforce 1 payment per sender - receiver pair
-PaymentSchema.index({ 'userid': 1, 'orgid': 1 }, { unique: true });
-
-module.exports = mongoose.model('Payment', PaymentSchema);
+module.exports = mongoose.model('Transaction', TransactionSchema);

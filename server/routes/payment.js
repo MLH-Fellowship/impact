@@ -14,6 +14,17 @@ paymentRouter.get('/', (req, res) => {
   })
 });
 
+paymentRouter.get('/org/:id', (req, res) => {
+  Payment.find({}, (err, response) => {
+    if(err) {
+      console.log(err.message);
+    }
+    else {
+      res.status(200).json(response);
+    }
+  })
+});
+
 // CREATE 
 paymentRouter.post('/', (req, res) => {
   const payment = new Payment(req.body);

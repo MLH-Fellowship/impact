@@ -63,7 +63,7 @@ export default {
                 .then(data => data);
     },
 
-    // PAYMENTS
+    // RECURRING PAYMENTS
     getPayments: () => {
         return fetch('/payment')
                 .then(res => res.json())
@@ -89,6 +89,22 @@ export default {
         return fetch(`/payment`,
             {method : 'post',
             body: JSON.stringify(payment),
+            headers : {
+                'Content-Type' : 'application/json'
+            }}).then(res => res.json())
+                .then(data => data);
+    },
+
+    // TRANSACTIONS
+    getTransaction: () => {
+        return fetch('/transaction')
+                .then(res => res.json())
+                .then(data => data);
+    },
+    createTransaction: (transaction) => {
+        return fetch(`/transaction`,
+            {method : 'post',
+            body: JSON.stringify(transaction),
             headers : {
                 'Content-Type' : 'application/json'
             }}).then(res => res.json())
