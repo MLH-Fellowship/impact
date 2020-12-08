@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Table } from 'antd';
+import api from '../Scripts/api';
 
 const columns = [
   {
@@ -38,7 +39,8 @@ export class OrgTable extends Component {
 
   async getData() {
     try {
-      let newData = await (await fetch("http://localhost:5000/org")).json();
+      // let newData = await (await fetch("http://localhost:5000/org")).json();
+      let newData = await api.getOrgs();
       let realDataObjs = [];
       for (let obj in newData){
         realDataObjs.push({
