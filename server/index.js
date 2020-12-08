@@ -11,7 +11,11 @@ app.use(express.json());
 
 //routes
 const org = require('./routes/org');
+const payment = require('./routes/payment');
+const user = require('./routes/user');
 app.use('/org', org);
+app.use('/payment', payment);
+app.use('/user', user);
 
 mongoose.connect(process.env.URI, {
   useNewUrlParser: true,
