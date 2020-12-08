@@ -17,6 +17,10 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  cards: {
+    type: Array,
+    required: true
   }
 });
 

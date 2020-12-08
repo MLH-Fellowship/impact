@@ -1,10 +1,10 @@
 const express = require('express');
-const orgRouter = express.Router();
-const Org = require('../model/Org');
+const userRouter = express.Router();
+const User = require('../model/User');
 
 // GET
-orgRouter.get('/', (req, res) => {
-  Org.find({}, (err, response) => {
+userRouter.get('/', (req, res) => {
+  User.find({}, (err, response) => {
     if(err) {
       console.log(err.message);
     }
@@ -15,14 +15,14 @@ orgRouter.get('/', (req, res) => {
 });
 
 // CREATE 
-orgRouter.post('/', (req, res) => {
-  const org = new Org(req.body);
+userRouter.post('/', (req, res) => {
+  const user = new User(req.body);
 
-  org.save((err, doc) => {
+  user.save((err, doc) => {
     if (err) {
       res.status(500).json({
         message: {
-          msgBody: 'Unable to add org',
+          msgBody: 'Unable to add user',
           msgError: true
         }
       });
@@ -30,7 +30,7 @@ orgRouter.post('/', (req, res) => {
     else {
       res.status(200).json({
         message: {
-          msgBody: 'Successfully added org',
+          msgBody: 'Successfully added user',
           msgError: false
         }
       });
@@ -39,12 +39,12 @@ orgRouter.post('/', (req, res) => {
 });
 
 // DELETE
-orgRouter.delete('/:id', (req, res) => {
-  Org.findByIdAndDelete(req.params.id, err => {
+userRouter.delete('/:id', (req, res) => {
+  User.findByIdAndDelete(req.params.id, err => {
     if (err) {
       res.status(500).json({
         message: {
-          msgBody: 'Unable to delete org',
+          msgBody: 'Unable to delete user',
           msgError: true
         }
       });
@@ -52,7 +52,7 @@ orgRouter.delete('/:id', (req, res) => {
     else {
       res.status(200).json({
         message: {
-          msgBody: 'Successfully deleted org',
+          msgBody: 'Successfully deleted user',
           msgError: false
         }
       });
@@ -61,12 +61,12 @@ orgRouter.delete('/:id', (req, res) => {
 });
 
 // UPDATE
-orgRouter.put('/:id', (req, res) => {
-  Org.findOneAndUpdate(req.params.id, req.body, { runValidators: true }, (err, response) => {
+userRouter.put('/:id', (req, res) => {
+  User.findOneAndUpdate(req.params.id, req.body, { runValidators: true }, (err, response) => {
     if (err) {
       res.status(500).json({
         message: {
-          msgBody: 'Unable to update org',
+          msgBody: 'Unable to update user',
           msgError: true
         }
       });
@@ -74,7 +74,7 @@ orgRouter.put('/:id', (req, res) => {
     else {
       res.status(200).json({
         message: {
-          msgBody: 'Successfully updated org',
+          msgBody: 'Successfully updated user',
           msgError: false
         }
       });
@@ -82,5 +82,5 @@ orgRouter.put('/:id', (req, res) => {
   })
 });
 
-module.exports = orgRouter;
+module.exports = userRouter;
 
