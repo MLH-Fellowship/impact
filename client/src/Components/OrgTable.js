@@ -1,8 +1,16 @@
-import { Component } from 'react';
-import { Table } from 'antd';
+import { Component, useState, useEffect } from 'react';
+import { Spin, Table, Modal, Button } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import DonationModal from './DonationModal';
 import api from '../Scripts/api';
 
-const columns = [
+const OrgTable = () => {
+  const [data, setData] = useState();
+  const [visible, setVisible] = useState(false); 
+  const [loading, setLoading] = useState(true);
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+  const columns = [
   {
     title: "Name",
     dataIndex: "name",
@@ -24,45 +32,36 @@ const columns = [
     dataIndex: "location",
     key: "location",
   },
-];
-
-export class OrgTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-    };
-  }
-
-  componentDidMount() {
-    this.getData();
-  }
-
-  async getData() {
-    try {
-      // let newData = await (await fetch("http://localhost:5000/org")).json();
-      let newData = await api.getOrgs();
-      let realDataObjs = [];
-      for (let obj in newData){
-        realDataObjs.push({
-          key: obj,
-          name: newData[obj].name,
-          cause: newData[obj].cause,
-          location: newData[obj].location,
-          desc: newData[obj].desc,
-          website: newData[obj].website
-        });
-      }
-      console.log("Retrieved data!");
-      this.setState({data: realDataObjs});
-    } catch (error) {
-      console.error(error);
+  {
+    title: "",
+    dataIndex: "",
+    key: "x",
+    render: () => <DonationModal />
     }
-  }
+  ];
 
-  render() {
-    return (
-            <Table columns={columns} dataSource={this.state.data} />
-    );
-  }
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        let newData = await api.getOrgs();
+        setData(newData);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getData();
+  }, []);
+
+  return (
+    <>
+      <Spin indicator={antIcon} spinning={loading}>
+        <Table columns={columns} dataSource={data} />
+      </Spin>
+    </>
+  );
 }
+
+export default OrgTable;
