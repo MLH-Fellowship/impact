@@ -1,5 +1,5 @@
-import { Component, useState, useEffect } from 'react';
-import { Spin, Table, Modal, Button } from 'antd';
+import { useState, useEffect } from 'react';
+import { Spin, Table } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import DonationModal from './DonationModal';
 import api from '../Scripts/api';
@@ -45,6 +45,7 @@ const OrgTable = () => {
     async function getData() {
       try {
         let newData = await api.getOrgs();
+        for (let key in newData) newData[key].key = key;
         setData(newData);
         setLoading(false);
       } catch (error) {

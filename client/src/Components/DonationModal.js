@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Input, InputNumber, Select, message } from 'antd';
 import api from '../Scripts/api';
+import useUser from '../Scripts/userManager';
 
 const DonationModal = (props) => {
   const [visible, setVisible] = useState(false);
   const { Option } = Select;
+  const { user } = useUser();
 
   const onFinish = values => {
-    // TODO: don't hardcode userid
     try {
-      let payload = { ...values, orgid: props.org, userid: '5fcf264e749fd7a34212d7cf', active: true };
+      let payload = { ...values, orgid: props.org, userid: user.userID, active: true };
       // POST payment
       api.createPayment(payload);
       message.success("A recurring donation to this organization was created");
@@ -60,7 +61,6 @@ const DonationModal = (props) => {
             </Form.Item>
             <Form.Item label="How much would you like to donate in USD?" name="value" rules={[{ required: true, message: 'Please indicate an amount' }]}>
               <InputNumber
-                defaultValue={5}
                 formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 parser={value => value.replace(/\$\s?|(,*)/g, '')}
               />
