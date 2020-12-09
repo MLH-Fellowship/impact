@@ -3,13 +3,13 @@ import {useParams} from "react-router-dom";
 import { OrgLogIn } from "../Components/OrgLogIn";
 import { UserLogIn } from "../Components/UserLogIn";
 
-export function LogInPage() {
+export function LogInPage(props) {
     const type = useParams().type;
     // console.log(type);
     return (
         <div>
-            {type === "user" ? <h3>User Sign Up</h3> : <h3>Organization Sign Up</h3>}
-        {type === "user" ? <UserLogIn /> : <OrgLogIn />}
+            {type === "user" ? <h3>User Log In</h3> : <h3>Organization Log In</h3>}
+        {type === "user" ? <UserLogIn setUser={props.setUser}/> : <OrgLogIn />}
         </div>
     );
 

@@ -16,10 +16,11 @@ const tailLayout = {
   },
 };
 
-export function UserLogIn() {
-    const onFinish = (values) => {
+export function UserLogIn(props) {
+    const onFinish = async (values) => {
         console.log('Success:', values);
-        console.log(api.loginUser(values));
+        let user = await api.loginUser(values);
+        props.setUser(user);
       };
     
     const onFinishFailed = (errorInfo) => {
