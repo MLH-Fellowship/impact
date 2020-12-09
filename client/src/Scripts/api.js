@@ -60,7 +60,7 @@ export default {
             headers : {
                 'Content-Type' : 'application/json'
             }}).then(res => res.json())
-                .then(data => data);
+                .then(data => console.log(data));
     },
 
     // RECURRING PAYMENTS
