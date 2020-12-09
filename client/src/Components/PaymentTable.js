@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Table, Spin } from 'antd';
+import { Table, Spin, Button, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import api from '../Scripts/api';
 
@@ -8,6 +8,18 @@ function PaymentTable() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+  const onDelete = (orgid) => {
+    try {
+      setData(data.filter(x => x._id !== orgid));
+      api.deletePayment(orgid);
+      message.success("Recurring donation deleted");
+    }
+    catch {
+      console.log("An error occurred");
+    }
+  }
+
 
   const columns = [
     {
@@ -37,6 +49,12 @@ function PaymentTable() {
       title: "Status",
       dataIndex: "active",
       key: "active",
+    },
+    {
+      title: "",
+      dataIndex: "",
+      key: "x",
+      render: (row) => <Button onClick={() => { onDelete(row._id) }}>Delete</Button>// Pass org id to donation modal
     }
   ];
 
