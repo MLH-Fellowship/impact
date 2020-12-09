@@ -74,6 +74,18 @@ export function OrgSignUp() {
             <Input.Password />
             </Form.Item>
             <Form.Item
+            label="Website"
+            name="website"
+            rules={[
+                {
+                required: true,
+                message: 'Please input your website\'s URL!',
+                },
+            ]}
+            >
+            <Input />
+            </Form.Item>
+            <Form.Item
             label="Description"
             name="desc"
             rules={[
