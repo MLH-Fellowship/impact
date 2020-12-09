@@ -22,6 +22,10 @@ const OrgSchema = new Schema({
   },
   location: {
     type: String
+  },
+  website: {
+    type: String,
+    required: true
   }
 });
 

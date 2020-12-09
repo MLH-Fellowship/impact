@@ -1,9 +1,11 @@
 import "./App.scss";
 import { Route, BrowserRouter as Router, Link } from "react-router-dom";
-import { Menu, PageHeader, Layout} from "antd";
+import { Menu, Layout} from "antd";
 import React from "react";
 import { OrgsPage } from "./Pages/OrgsPage";
 import { HomePage } from "./Pages/HomePage";
+import { SignUpPage } from "./Pages/SignUpPage";
+import { UserPage } from "./Pages/UserPage";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -23,10 +25,15 @@ function App() {
             <Menu.Item key="orgs">
               <Link to="/orgs">Organizations</Link>
             </Menu.Item>
+            <Menu.Item key="users">
+              <Link to="/user">User</Link>
+            </Menu.Item>
           </Menu>
       </Sider>
       <Content style={{padding: '2em'}}>
         <Route path="/orgs" component={OrgsPage} />
+        <Route path="/user" component={UserPage} />
+        <Route path="/signup/:type" component={SignUpPage} />
         <Route path="/" exact component={HomePage} />
       </Content>
       </Layout>
