@@ -29,14 +29,10 @@ function App() {
               <Menu.Item key="profile">
               <Link to="/profile">My Profile</Link>
             </Menu.Item>
-            <Menu.Item key="users">
-              <Link to="/user">User</Link>
-            </Menu.Item>
           </Menu>
       </Sider>
       <Content style={{padding: '2em'}}>
         <Route path="/orgs" component={OrgsPage} />
-        <Route path="/user" component={UserPage} />
         <Route path="/signup/:type" component={SignUpPage} />
         <Route path="/" exact component={HomePage} />
         <Route path="/profile" component={ProfilePage} />
