@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Input, InputNumber, Select } from 'antd';
+import api from '../Scripts/api';
 
-const DonationModal = () => {
+const DonationModal = (props) => {
   const [visible, setVisible] = useState(false);
   const { Option } = Select;
-  // const [form] = Form.useForm();
-
-  async function formComplete() {
-    // console.log(form.values);
-    setVisible(false);
-  }
 
   const onFinish = values => {
-    console.log('Success:', values);
+    // TODO: don't hardcode userid
+    let payload = { ...values, orgid: props.org, userid: '5fcf264e749fd7a34212d7cf', active: true };
+    setVisible(false);
+
+    // POST payment
+    api.createPayment(payload);
   };
 
   const onFinishFailed = errorInfo => {
@@ -22,7 +22,7 @@ const DonationModal = () => {
   return (
     <>
       <Button type="primary" onClick={() => setVisible(true)}>
-        Make Donation
+        Donate Now
       </Button>
       <Modal
         title="Make Donation"

@@ -36,7 +36,7 @@ const OrgTable = () => {
     title: "",
     dataIndex: "",
     key: "x",
-    render: () => <DonationModal />
+    render: (row) => <DonationModal org={row._id}/> // Pass org id to donation modal
     }
   ];
 
