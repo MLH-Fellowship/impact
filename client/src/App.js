@@ -4,6 +4,7 @@ import { Menu, PageHeader, Layout} from "antd";
 import React from "react";
 import { OrgsPage } from "./Pages/OrgsPage";
 import { HomePage } from "./Pages/HomePage";
+import { SignUpPage } from "./Pages/SignUpPage";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -27,6 +28,7 @@ function App() {
       </Sider>
       <Content style={{padding: '2em'}}>
         <Route path="/orgs" component={OrgsPage} />
+        <Route path="/signup" component={SignUpPage} />
         <Route path="/" exact component={HomePage} />
       </Content>
       </Layout>
