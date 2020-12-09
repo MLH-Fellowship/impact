@@ -2,6 +2,7 @@ import "./App.scss";
 import { Route, BrowserRouter as Router, Link } from "react-router-dom";
 import { Menu, Layout} from "antd";
 import React from "react";
+import { ProfilePage } from "./Pages/ProfilePage";
 import { OrgsPage } from "./Pages/OrgsPage";
 import { HomePage } from "./Pages/HomePage";
 import { SignUpPage } from "./Pages/SignUpPage";
@@ -25,6 +26,9 @@ function App() {
             </Menu.Item>
             <Menu.Item key="orgs">
               <Link to="/orgs">Organizations</Link>
+              </Menu.Item>
+              <Menu.Item key="profile">
+              <Link to="/profile">My Profile</Link>
             </Menu.Item>
             <Menu.Item key="users">
               <Link to="/user">User</Link>
@@ -37,6 +41,7 @@ function App() {
         <Route path="/signup/:type" component={SignUpPage} />
         <Route path="/login/:type" component={LogInPage} />
         <Route path="/" exact component={HomePage} />
+        <Route path="/profile" component={ProfilePage} />
       </Content>
       </Layout>
       <Footer>Made with &hearts; by the Impact team</Footer>

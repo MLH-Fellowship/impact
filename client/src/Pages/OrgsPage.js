@@ -1,5 +1,5 @@
 import { Space } from "antd";
-import { OrgTable } from "../Components/OrgTable";
+import OrgTable from "../Components/OrgTable";
 
 export function OrgsPage() {
   return (
