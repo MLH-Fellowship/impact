@@ -1,3 +1,4 @@
+const { resolveSoa } = require('dns');
 const express = require('express');
 const userRouter = express.Router();
 const User = require('../model/User');
@@ -81,6 +82,25 @@ userRouter.put('/:id', (req, res) => {
       });
     }
   })
+});
+
+userRouter.post("/login", (req, res) => {
+  User.findOne({ email: req.body.email }, (err, doc) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send({ message: "Could not find user!" });
+    } else if (!doc) {
+      console.log(`No user with email ${req.body.email}.`);
+      res.status(500).send({ message: "Could not find user!" });
+    }
+    else if (doc.password == req.body.password)
+      res.status(200).send({ 'user': doc.email, 'userID': doc.id });
+    else {
+      res.status(500).send('Unknown error.');
+      console.log('Document:', doc);
+      console.log('Request:', req.body);
+    }
+  });
 });
 
 module.exports = userRouter;

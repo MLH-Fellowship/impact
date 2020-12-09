@@ -62,6 +62,17 @@ export default {
             }}).then(res => res.json())
                 .then(data => console.log(data));
     },
+    loginUser: (user) => {
+        return fetch('/user/login', {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => data)
+    }, 
 
     // RECURRING PAYMENTS
     getPayments: () => {

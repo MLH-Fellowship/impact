@@ -5,6 +5,7 @@ import React from "react";
 import { OrgsPage } from "./Pages/OrgsPage";
 import { HomePage } from "./Pages/HomePage";
 import { SignUpPage } from "./Pages/SignUpPage";
+import { LogInPage } from "./Pages/LogInPage";
 import { UserPage } from "./Pages/UserPage";
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -34,6 +35,7 @@ function App() {
         <Route path="/orgs" component={OrgsPage} />
         <Route path="/user" component={UserPage} />
         <Route path="/signup/:type" component={SignUpPage} />
+        <Route path="/login/:type" component={LogInPage} />
         <Route path="/" exact component={HomePage} />
       </Content>
       </Layout>
