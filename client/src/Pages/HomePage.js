@@ -23,7 +23,10 @@ export function HomePage() {
           </Paragraph>
           <Title level={2}>Ready to get started?</Title>
           <Paragraph style={{ fontSize: "140%"}}>
-              Click <Link component={Typography.Link} to="/signup">here</Link> to sign up!
+              For organization, click <Link component={Typography.Link} to="/signup/orgs">here</Link> to sign up!
+          </Paragraph>
+          <Paragraph style={{ fontSize: "140%"}}>
+              For individual user, click <Link component={Typography.Link} to="/signup/user">here</Link> to sign up!
           </Paragraph>
         </Typography>
       </Card>
