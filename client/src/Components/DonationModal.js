@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Input, InputNumber, Select } from 'antd';
 import api from '../Scripts/api';
+import useUser from '../Scripts/userManager';
 
 const DonationModal = (props) => {
   const [visible, setVisible] = useState(false);
   const { Option } = Select;
+  const { user } = useUser();
 
   const onFinish = values => {
     // TODO: don't hardcode userid
-    let payload = { ...values, orgid: props.org, userid: '5fcf264e749fd7a34212d7cf', active: true };
+    let payload = { ...values, orgid: props.org, userid: user.userID, active: true };
     setVisible(false);
 
     // POST payment
@@ -55,13 +57,12 @@ const DonationModal = (props) => {
             </Form.Item>
             <Form.Item label="How much would you like to donate in USD?" name="value">
               <InputNumber
-                defaultValue={5}
                 formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 parser={value => value.replace(/\$\s?|(,*)/g, '')}
               />
             </Form.Item>
             <Form.Item label="How often would you like to donate?" name="freq">
-              <Select defaultValue="monthly">
+              <Select>
                 <Option value="daily">Daily</Option>
                 <Option value="weekly">Weekly</Option>
                 <Option value="monthly">Monthly</Option>

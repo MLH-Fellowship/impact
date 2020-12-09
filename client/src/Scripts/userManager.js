@@ -1,3 +1,4 @@
+import Sider from 'antd/lib/layout/Sider';
 import { useState } from 'react';
 
 export default function useUser() {
@@ -8,6 +9,10 @@ export default function useUser() {
     }
     const [user, setUser] = useState(getUser());
     const saveUser = user => {
+        if (user == undefined) {
+            sessionStorage.removeItem('user');
+            return;
+        }
         sessionStorage.setItem('user', JSON.stringify(user));
         setUser(user);
     }
