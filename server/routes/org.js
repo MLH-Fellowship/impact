@@ -20,6 +20,7 @@ orgRouter.post('/', (req, res) => {
 
   org.save((err, doc) => {
     if (err) {
+      console.error(err);
       res.status(500).json({
         message: {
           msgBody: 'Unable to add org',

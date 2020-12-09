@@ -7,26 +7,20 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
-    render: (text, record) => <a target='_blank' rel='noopener noreferrer' href={record.website}>{text}</a>
   },
   {
-    title: "Description",
-    dataIndex: "desc",
-    key: "desc",
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
   },
   {
-    title: "Cause",
-    dataIndex: "cause",
-    key: "cause",
-  },
-  {
-    title: "Location",
-    dataIndex: "location",
-    key: "location",
+    title: "Password",
+    dataIndex: "password",
+    key: "password",
   },
 ];
 
-export class OrgTable extends Component {
+export class UserTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,16 +35,14 @@ export class OrgTable extends Component {
   async getData() {
     try {
       // let newData = await (await fetch("http://localhost:5000/org")).json();
-      let newData = await api.getOrgs();
+      let newData = await api.getUsers();
       let realDataObjs = [];
       for (let obj in newData){
         realDataObjs.push({
           key: obj,
-          name: newData[obj].name,
-          cause: newData[obj].cause,
-          location: newData[obj].location,
-          desc: newData[obj].desc,
-          website: newData[obj].website
+          name: `${newData[obj].firstname} ${newData[obj].lastname}`,
+          email: newData[obj].email,
+          password: newData[obj].password,
         });
       }
       console.log("Retrieved data!");
