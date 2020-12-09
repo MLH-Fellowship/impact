@@ -58,7 +58,6 @@ function App() {
       </Sider>
       <Content style={{padding: '2em'}}>
         <Route path="/orgs" component={OrgsPage} />
-        <Route path="/user" component={UserPage} />
         <Route path="/signup/:type" component={SignUpPage} />
         <Route path="/login/:type">
           <LogInPage setUser={setUser}/>
