@@ -35,32 +35,32 @@ const DonationModal = () => {
         <Button onClick={() => setVisible(false)}>
             Cancel
         </Button>,
-        <Button form="myForm" htmlType="submit">
+        <Button form="myForm" htmlType="submit" type="primary">
             Submit
         </Button>
         ]}
       >
-        <>
           <Form
             name="basic"
-            initialValues={{ remember: true }}
+        initialValues={{ value: 5, freq:"monthly" }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+          onFinishFailed={onFinishFailed}
+          id="myForm"
           >
-            <Form.Item label="Choose a Card">
-              <Select defaultValue="Card 1">
+            <Form.Item label="Choose a Card" name="card">
+              <Select>
                 <Option value="card1">Card 1</Option>
                 <Option value="card2">Card 2</Option>
               </Select>
             </Form.Item>
-            <Form.Item label="How much would you like to donate in USD?">
+            <Form.Item label="How much would you like to donate in USD?" name="value">
               <InputNumber
                 defaultValue={5}
                 formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 parser={value => value.replace(/\$\s?|(,*)/g, '')}
               />
             </Form.Item>
-            <Form.Item label="How often would you like to donate?">
+            <Form.Item label="How often would you like to donate?" name="freq">
               <Select defaultValue="monthly">
                 <Option value="daily">Daily</Option>
                 <Option value="weekly">Weekly</Option>
@@ -69,13 +69,12 @@ const DonationModal = () => {
                 <Option value="annually">Anually</Option>
               </Select>
             </Form.Item>
-            <Form.Item>
+            {/* <Form.Item>
               <Button type="primary" htmlType="submit">
                 Submit
               </Button>
-            </Form.Item>
+            </Form.Item> */}
           </Form>
-        </>
       </Modal>
     </>
   );
