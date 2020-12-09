@@ -8,7 +8,7 @@ import { HomePage } from "./Pages/HomePage";
 import { SignUpPage } from "./Pages/SignUpPage";
 import { LogInPage } from "./Pages/LogInPage";
 import { UserPage } from "./Pages/UserPage";
-import userManager from "./Scripts/userManager";
+import useUser from "./Scripts/userManager";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -24,7 +24,7 @@ const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
 
-  const { user, setUser } = userManager();
+  const { user, setUser } = useUser();
   
   return (
     <Router style={{height: '100vh'}}>

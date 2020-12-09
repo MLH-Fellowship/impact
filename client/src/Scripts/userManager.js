@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function userManager() {
+export default function useUser() {
     const getUser = () => {
         const userString = sessionStorage.getItem('user');
         const user = JSON.parse(userString);
