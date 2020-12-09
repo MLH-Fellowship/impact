@@ -11,9 +11,10 @@ function PaymentTable() {
 
   const columns = [
     {
-      title: "Organization",
+      title: "Name",
       dataIndex: "name",
       key: "name",
+      render: (text, record) => <a target='_blank' rel='noopener noreferrer' href={record.website}>{text}</a>
     },
     {
       title: "Freq",
@@ -24,7 +25,8 @@ function PaymentTable() {
       title: "Value ($)",
       dataIndex: "value",
       key: "value",
-      sorter: (a, b) => a.age - b.age
+      sorter: (a, b) => a.value - b.value,
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: "Recurrence",
@@ -50,6 +52,7 @@ function PaymentTable() {
         for (var i = 0; i < newData.length; i++) {
           newData[i].active = newData[i].active ? 'Active' : 'Paused';
           newData[i].name = orgLookup.find(x => x._id === newData[i].orgid).name;
+          newData[i].website = orgLookup.find(x => x._id === newData[i].orgid).website;
         }
         console.log(newData);
 
