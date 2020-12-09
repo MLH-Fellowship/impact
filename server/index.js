@@ -1,13 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const path = require('path');
 
 require('dotenv').config()
 
 const app = express();
+
+// Cors and json body parsing 
 app.use(cors());
 app.use(express.json());
+
+// Serve the react app
+app.use(express.static(path.resolve('../', 'client', 'build')));
 
 //routes
 const org = require('./routes/org');
@@ -18,6 +23,7 @@ app.use('/org', org);
 app.use('/payment', payment);
 app.use('/user', user);
 app.use('/transaction', transaction);
+app.get('*', (_req, res) => res.sendFile(path.resolve('../', 'client', 'build', 'index.html')));
 
 mongoose.connect(process.env.URI, {
   useNewUrlParser: true,
