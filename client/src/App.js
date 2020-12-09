@@ -33,7 +33,7 @@ function App() {
       <Content style={{padding: '2em'}}>
         <Route path="/orgs" component={OrgsPage} />
         <Route path="/user" component={UserPage} />
-        <Route path="/signup" component={SignUpPage} />
+        <Route path="/signup/:type" component={SignUpPage} />
         <Route path="/" exact component={HomePage} />
       </Content>
       </Layout>
