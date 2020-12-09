@@ -1,5 +1,5 @@
 import "./App.scss";
-import { Route, BrowserRouter as Router, Link } from "react-router-dom";
+import { Route, BrowserRouter as Router, Redirect, Link } from "react-router-dom";
 import { Menu, Layout} from "antd";
 import React from "react";
 import { ProfilePage } from "./Pages/ProfilePage";
@@ -45,9 +45,12 @@ function App() {
               <Menu.Item key="orgs">
                 <Link to="/orgs">Organizations</Link>
               </Menu.Item>
-              <Menu.Item key="profile">
-                <Link to="/profile">My Profile</Link>
+              { user != null ?
+                <Menu.Item key="profile">
+                  <Link to="/profile">My Profile</Link>
               </Menu.Item>
+              : <></>
+              }
               <Menu.Item key="loginUser">
                 <Link
                   to="/login/user"
@@ -67,13 +70,15 @@ function App() {
             </Menu>
           </Sider>
           <Content style={{ padding: "2em" }}>
-            <Route path="/orgs" component={OrgsPage} />
+            <Route path="/orgs" component={OrgsPage} /> 
             <Route path="/signup/:type" component={SignUpPage} />
             <Route path="/login/:type">
               <LogInPage setUser={setUser} />
             </Route>
             <Route path="/" exact component={HomePage} />
             <Route path="/profile" component={ProfilePage} />
+            <Route exact path="/profile"
+                render={props => user != null ? ProfilePage : <Redirect to="/login/user" />} />
           </Content>
         </Layout>
         <Footer>Made with &hearts; by the Impact team</Footer>
