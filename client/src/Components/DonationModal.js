@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, Input, InputNumber, Select } from 'antd';
+import { Modal, Button, Form, Input, InputNumber, Select, message } from 'antd';
 import api from '../Scripts/api';
 
 const DonationModal = (props) => {
@@ -8,11 +8,16 @@ const DonationModal = (props) => {
 
   const onFinish = values => {
     // TODO: don't hardcode userid
-    let payload = { ...values, orgid: props.org, userid: '5fcf264e749fd7a34212d7cf', active: true };
+    try {
+      let payload = { ...values, orgid: props.org, userid: '5fcf264e749fd7a34212d7cf', active: true };
+      // POST payment
+      api.createPayment(payload);
+      message.success("A recurring donation to this organization was created");
+    }
+    catch {
+      message.warning("A recurring donation to this organization already exists.");
+    }
     setVisible(false);
-
-    // POST payment
-    api.createPayment(payload);
   };
 
   const onFinishFailed = errorInfo => {
@@ -47,20 +52,20 @@ const DonationModal = (props) => {
           onFinishFailed={onFinishFailed}
           id="myForm"
           >
-            <Form.Item label="Choose a Card" name="card">
+            <Form.Item label="Choose a card" name="card" rules={[{ required: true, message: 'Please select a card' }]}>
               <Select>
                 <Option value="card1">Card 1</Option>
                 <Option value="card2">Card 2</Option>
               </Select>
             </Form.Item>
-            <Form.Item label="How much would you like to donate in USD?" name="value">
+            <Form.Item label="How much would you like to donate in USD?" name="value" rules={[{ required: true, message: 'Please indicate an amount' }]}>
               <InputNumber
                 defaultValue={5}
                 formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 parser={value => value.replace(/\$\s?|(,*)/g, '')}
               />
             </Form.Item>
-            <Form.Item label="How often would you like to donate?" name="freq">
+            <Form.Item label="How often would you like to donate?" name="freq" rules={[{ required: true, message: 'Please select a recurrence' }]}>
               <Select defaultValue="monthly">
                 <Option value="daily">Daily</Option>
                 <Option value="weekly">Weekly</Option>
